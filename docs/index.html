@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Supplementary data page for the revised WVC sensor-network proof-of-concept paper (FID-draw model).">
+    <title>A Radar-Magnetometer Sensor Network with LoRa-Mediated Awareness for Wildlife-Vehicle Collision Mitigation: A Monte Carlo Simulation-Based Proof of Concept — Data Page</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+    --bg: #fdfcf8;
+    --fg: #1f2937;
+    --fg-soft: #4b5563;
+    --muted: #6b7280;
+    --rule: #e5e7eb;
+    --rule-strong: #cbd5e1;
+    --accent: #1e3a8a;
+    --accent-soft: #eef2ff;
+    --card: #ffffff;
+    --code-bg: #f3f4f6;
+    --color-control: #dc2626;
+    --color-detection: #ea580c;
+    --color-aware: #15803d;
+    --sig-3: #047857;
+    --sig-2: #65a30d;
+    --sig-1: #b45309;
+    --sig-ns: #94a3b8;
+}
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: #0b1120;
+        --fg: #e2e8f0;
+        --fg-soft: #cbd5e1;
+        --muted: #94a3b8;
+        --rule: #1f2a44;
+        --rule-strong: #2c3a5c;
+        --accent: #93c5fd;
+        --accent-soft: #1e293b;
+        --card: #111827;
+        --code-bg: #1e293b;
+    }
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+    font-family: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+    background: var(--bg); color: var(--fg);
+    line-height: 1.65; max-width: 1120px;
+    margin: 0 auto; padding: 3rem 1.75rem 5rem;
+    -webkit-font-smoothing: antialiased;
+}
+header.paper-head {
+    border-bottom: 1px solid var(--rule-strong);
+    padding-bottom: 1.5rem; margin-bottom: 2.5rem;
+}
+.eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--muted);
+    margin-bottom: 0.6rem;
+}
+h1.paper-title {
+    font-family: 'Newsreader', Georgia, serif;
+    font-weight: 500; font-size: 2.1rem; line-height: 1.18;
+    letter-spacing: -0.01em; margin: 0 0 0.9rem 0;
+    color: var(--fg);
+}
+.authors {
+    color: var(--fg-soft); font-size: 1.02rem; margin: 0 0 1rem 0;
+}
+.authors em { font-style: italic; color: var(--muted); font-size: 0.92rem; }
+.meta {
+    display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.8rem;
+}
+.tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.74rem; letter-spacing: 0.02em;
+    background: var(--accent-soft); color: var(--accent);
+    padding: 0.25rem 0.65rem; border-radius: 2px;
+    border: 1px solid var(--rule);
+}
+nav.toc {
+    position: sticky; top: 0; z-index: 5;
+    background: var(--bg);
+    border-bottom: 1px solid var(--rule);
+    padding: 0.85rem 0; margin: -1rem 0 2.5rem 0;
+    backdrop-filter: blur(8px);
+}
+nav.toc ul { list-style: none; margin: 0; padding: 0;
+    display: flex; gap: 1.8rem; flex-wrap: wrap;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.82rem; letter-spacing: 0.02em; }
+nav.toc a { color: var(--fg-soft); text-decoration: none; }
+nav.toc a:hover { color: var(--accent); border-bottom: 1px solid var(--accent); }
+section { margin-bottom: 4rem; scroll-margin-top: 4rem; }
+section > h2 {
+    font-family: 'Newsreader', Georgia, serif;
+    font-weight: 500; font-size: 1.65rem; line-height: 1.25;
+    letter-spacing: -0.005em; margin: 0 0 0.4rem 0;
+    color: var(--fg);
+}
+section > h2 .num {
+    display: inline-block; width: 2.2rem;
+    color: var(--muted); font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.92rem; font-weight: 400; vertical-align: middle;
+}
+section > h2 + p.lede {
+    color: var(--fg-soft); font-size: 1.02rem;
+    margin: 0 0 1.4rem 2.2rem; max-width: 60ch;
+}
+h3 {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 600; font-size: 1.05rem;
+    margin: 1.8rem 0 0.6rem 2.2rem;
+    color: var(--fg);
+}
+.content { margin-left: 2.2rem; }
+.summary-card {
+    background: var(--card); border: 1px solid var(--rule);
+    border-left: 3px solid var(--accent);
+    padding: 1.1rem 1.4rem; margin: 1rem 0 1.8rem 2.2rem;
+    max-width: 75ch;
+}
+.summary-card p { margin: 0.35rem 0; }
+.summary-card .label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--muted);
+}
+table {
+    border-collapse: collapse; width: 100%;
+    margin: 1rem 0 1.4rem 0; font-size: 0.92rem;
+    background: var(--card); border: 1px solid var(--rule);
+}
+thead th {
+    text-align: left; padding: 0.55rem 0.85rem;
+    background: var(--accent-soft); color: var(--accent);
+    border-bottom: 1px solid var(--rule);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem; font-weight: 500;
+    letter-spacing: 0.04em; text-transform: uppercase;
+}
+tbody td { padding: 0.55rem 0.85rem; border-bottom: 1px solid var(--rule); vertical-align: top; }
+tbody tr:last-child td { border-bottom: 0; }
+td.num { text-align: right; font-variant-numeric: tabular-nums;
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.88rem; }
+.mode-ctrl { color: var(--color-control); font-weight: 600; }
+.mode-det  { color: var(--color-detection); font-weight: 600; }
+.mode-awr  { color: var(--color-aware); font-weight: 600; }
+.sig-3  { color: var(--sig-3); font-weight: 600; font-family: 'IBM Plex Mono', monospace; }
+.sig-2  { color: var(--sig-2); font-weight: 600; font-family: 'IBM Plex Mono', monospace; }
+.sig-1  { color: var(--sig-1); font-weight: 600; font-family: 'IBM Plex Mono', monospace; }
+.sig-ns { color: var(--sig-ns); font-family: 'IBM Plex Mono', monospace; }
+.plot-wrap { margin: 1.8rem 0; }
+.plot-caption {
+    font-size: 0.88rem; color: var(--muted);
+    margin: 0.3rem 0 1rem 0; font-style: italic;
+    max-width: 78ch;
+}
+code, kbd {
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.86em;
+    background: var(--code-bg); padding: 0.08rem 0.35rem;
+    border-radius: 2px;
+}
+pre {
+    background: var(--code-bg); padding: 1rem 1.2rem;
+    border-radius: 4px; overflow-x: auto;
+    border-left: 3px solid var(--rule-strong);
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.85rem;
+    line-height: 1.55;
+}
+.footer {
+    margin-top: 5rem; padding-top: 1.8rem;
+    border-top: 1px solid var(--rule);
+    color: var(--muted); font-size: 0.85rem;
+}
+.footer a { color: var(--accent); }
+a { color: var(--accent); text-decoration: none; border-bottom: 1px solid currentColor; }
+a:hover { background: var(--accent-soft); }
+.kpi-row {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 1rem; margin: 1.4rem 0 2rem 2.2rem;
+}
+.kpi {
+    background: var(--card); border: 1px solid var(--rule);
+    padding: 1rem 1.1rem; border-radius: 3px;
+}
+.kpi .num {
+    font-family: 'Newsreader', Georgia, serif;
+    font-size: 1.7rem; font-weight: 500;
+    color: var(--fg); line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+}
+.kpi .lab {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--muted);
+    margin-top: 0.4rem;
+}
+@media print {
+    body { max-width: none; padding: 0; }
+    nav.toc { display: none; }
+    section { page-break-inside: avoid; }
+}
+</style>
+
+<style>
+figure.fig { margin: 1.5rem 0 0.5rem; }
+figure.fig img { width: 100%; height: auto; border: 1px solid var(--rule); border-radius: 4px; background: #fff; }
+.fig-pending {
+  border: 1px dashed var(--rule-strong); border-radius: 4px;
+  padding: 2.5rem 1rem; text-align: center; color: var(--muted);
+  font-family: 'IBM Plex Mono', monospace; font-size: 0.82rem; background: var(--code-bg);
+}
+.callout {
+  border-left: 3px solid var(--accent); background: var(--accent-soft);
+  padding: 0.75rem 1rem; margin: 1.25rem 0; border-radius: 0 4px 4px 0; font-size: 0.92rem;
+}
+.callout strong { color: var(--accent); }
+</style>
+
+</head>
+<body>
+
+    <header class="paper-head">
+        <div class="eyebrow">Supplementary data page · Revised (FID-draw model, v2.0.0)</div>
+        <h1 class="paper-title">A Radar–Magnetometer Sensor Network with LoRa-Mediated Awareness Propagation for Wildlife-Vehicle Collision Mitigation: A Monte Carlo Simulation-Based Proof of Concept</h1>
+        <p class="authors">Suryavansham Sahoo · <em>IIT Kharagpur</em></p>
+        <div class="meta">
+            <span class="tag">13 sensitivity sweeps</span>
+            <span class="tag">Headline 60 trials</span>
+            <span class="tag">FID-draw behavioural model</span>
+            <span class="tag">Open data + code</span>
+        </div>
+    </header>
+
+    <nav class="toc"><ul>
+      <li><a href="#headline">Headline result</a></li>
+      <li><a href="#traffic">Traffic-volume envelope</a></li>
+      <li><a href="#robustness">Parameter robustness</a></li>
+      <li><a href="#awareness">Awareness layer</a></li>
+      <li><a href="#magnetometer">Magnetometer ablation</a></li>
+      <li><a href="#methods">Methods</a></li>
+      <li><a href="#data">Data &amp; code</a></li>
+    </ul></nav>
+
+    <div class="callout">
+      <strong>About this revision.</strong> This page reports the revised model used in the submitted manuscript, in
+      which the flight decision is driven by an empirical flight-initiation-distance (FID) draw calibrated to the
+      field data of Blackwell et al. (2014), replacing the earlier fixed-probability state model. Summary figures are
+      static (300&nbsp;DPI) PNGs regenerated from the <code>data</code> dataset; the interactive in-browser
+      explorer is deferred. Full derivations, the complete statistical battery, and Supplementary Tables&nbsp;S1–S5
+      and Figures&nbsp;S1–S12 are in Appendix&nbsp;A of the manuscript.
+    </div>
+
+<section id="headline">
+  <h2><span class="num">01</span> Headline three-mode comparison</h2>
+  <p class="lede">20 trials × 4 simulated hours per mode (60 trials total), at default parameters under Common Random
+  Numbers. The two-step contrast isolates each architectural layer: <em>Detection</em> adds sensors + driver alerts;
+  <em>Aware</em> further adds LoRa-mediated network-awareness boost.</p>
+
+  <div class="kpi-row">
+    <div class="kpi"><div class="num">13.22%</div><div class="lab">Control collision rate</div></div>
+    <div class="kpi"><div class="num">7.89%</div><div class="lab">Detection / Aware rate</div></div>
+    <div class="kpi"><div class="num">40.3%</div><div class="lab">Relative reduction</div></div>
+    <div class="kpi"><div class="num">p = 0.062</div><div class="lab">Poisson GLM (borderline)</div></div>
+    <div class="kpi"><div class="num">0.313 s</div><div class="lab">In-range latency</div></div>
+  </div>
+
+  <div class="content">
+    <h3>Per-mode statistics (collision rate per road entry)</h3>
+    <table><thead><tr><th>Mode</th><th>n</th><th>Collision rate (%)</th><th>Detection rate (%)</th><th>In-range latency (s)</th><th>Road entries (median)</th></tr></thead><tbody>
+      <tr><td class="mode-ctrl">Control</td><td class="num">20</td><td class="num">13.22</td><td class="num">0.00</td><td class="num">&mdash;</td><td class="num">&asymp; 10</td></tr>
+      <tr><td class="mode-det">Detection</td><td class="num">20</td><td class="num">7.89</td><td class="num">20.85</td><td class="num">0.313</td><td class="num">&asymp; 11.5</td></tr>
+      <tr><td class="mode-awr">Aware</td><td class="num">20</td><td class="num">7.89</td><td class="num">20.85</td><td class="num">0.313</td><td class="num">&asymp; 12</td></tr>
+    </tbody></table>
+
+    <h3>Pairwise comparisons (Poisson / negative-binomial GLM, log road-entry offset)</h3>
+    <table><thead><tr><th>Comparison</th><th>Rate ratio (95% CI)</th><th>Reduction</th><th>GLM p</th><th>Sig.</th></tr></thead><tbody>
+      <tr><td><span class="mode-ctrl">Control</span> vs <span class="mode-det">Detection</span></td><td class="num">0.577 [0.32, 1.03]</td><td class="num">40.3%</td><td class="num">0.062</td><td class="sig-ns">n.s.</td></tr>
+      <tr><td><span class="mode-ctrl">Control</span> vs <span class="mode-awr">Aware</span></td><td class="num">0.577 [0.32, 1.03]</td><td class="num">40.3%</td><td class="num">0.062</td><td class="sig-ns">n.s.</td></tr>
+      <tr><td><span class="mode-det">Detection</span> vs <span class="mode-awr">Aware</span></td><td class="num">1.00 [0.53, 1.89]</td><td class="num">0.0%</td><td class="num">1.000</td><td class="sig-ns">n.s.</td></tr>
+    </tbody></table>
+    <p class="note" style="font-size:0.85rem;color:var(--muted);margin-top:0.5em;">The collision rate <em>per road entry</em> is the headline metric: it normalises for the differing number of crossing events each mode produces. Absolute collision counts are statistically indistinguishable across modes (Welch on per-trial means t = 1.60, p = 0.118); mitigation raises the road-entry denominator (more animals cross successfully rather than retreating), an intended ecological-connectivity outcome rather than an artifact. The borderline GLM p reflects the deliberately modest 20-trial budget and per-trial overdispersion, not a weak effect: at low traffic the same architecture reaches p = 0.003 (§02).</p>
+  </div>
+
+  <figure class="fig">
+    <img src="figure_3_headline.png" alt="Headline three-mode comparison"
+         onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+    <div class="fig-pending" style="display:none;">figure_3_headline.png — render via "python wvc.py figures" and copy into /docs</div>
+    <figcaption class="plot-caption">Figure 1. Four-panel three-mode Monte Carlo comparison (collision rate per road entry, detection rate, in-range latency, per-trial distributions). Detection and Aware overlap at the default density; the awareness boost is implementationally active but inert at λτ = 0.125.</figcaption>
+  </figure>
+  <figure class="fig">
+    <img src="figure_4_forest_headline.png" alt="Headline comparison, forest corridor"
+         onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+    <div class="fig-pending" style="display:none;">figure_4_forest_headline.png — place this figure in /docs</div>
+    <figcaption class="plot-caption">Figure 1b. Headline three-mode comparison under the forest-corridor configuration. Same three-mode contrast as Figure 1, confirming the effect is not specific to the open-road landscape.</figcaption>
+  </figure>
+
+</section>
+
+<section id="traffic">
+  <h2><span class="num">02</span> Operating envelope: traffic-volume regime</h2>
+  <p class="lede">Traffic volume is the only swept parameter for which the safety effect depends strongly on the parameter value (treatment × traffic interaction χ² = 32.5, p = 7.7 × 10⁻⁵). This sweep bounds the deployment claim.</p>
+
+  <div class="content">
+    <h3>Per-cell results (15 trials × 2 h per cell)</h3>
+    <table><thead><tr><th>Traffic (veh/dir/hr)</th><th>Aware collision rate (%)</th><th>Reduction vs Control</th><th>GLM p</th><th>Regime</th></tr></thead><tbody>
+      <tr><td class="num">1</td><td class="num">0.44</td><td class="num">96.2%</td><td class="num">0.003</td><td class="sig-2">Strongly beneficial **</td></tr>
+      <tr><td class="num">2</td><td class="num">1.67</td><td class="num">85.7%</td><td class="num">0.023</td><td class="sig-1">Beneficial *</td></tr>
+      <tr><td class="num">4</td><td class="num">9.90</td><td class="num">15.2%</td><td class="num">0.728</td><td class="sig-ns">Beneficial (n.s.)</td></tr>
+      <tr><td class="num">8</td><td class="num">9.01</td><td class="num">22.9%</td><td class="num">0.636</td><td class="sig-ns">Regime boundary</td></tr>
+      <tr><td class="num">16</td><td class="num">20.01</td><td class="num">−71.3%</td><td class="num">0.147</td><td class="sig-ns">Directional reversal</td></tr>
+    </tbody></table>
+    <p class="note" style="font-size:0.85rem;color:var(--muted);margin-top:0.5em;">The architecture delivers high-confidence reduction in rural low-volume corridors (v ≤ 2 veh/dir/hr), retains directional benefit at v = 4–8 with declining resolution, and approaches a regime where the broadcast-alert architecture is no longer well-matched to the traffic density at v ≥ 16 (alert-window aggregation under multi-vehicle convoys; reported as a directional signal, not a confirmed harm).</p>
+  </div>
+
+  <figure class="fig">
+    <img src="figure_5_traffic_volume.png" alt="Traffic-volume sweep"
+         onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+    <div class="fig-pending" style="display:none;">figure_5_traffic_volume.png — regenerate from data and place in /docs</div>
+    <figcaption class="plot-caption">Figure 2. Collision rate and reduction vs traffic volume (log axis), with significance markers at v = 1 and v = 2; sensor detection rate and latency by volume.</figcaption>
+  </figure>
+</section>
+
+<section id="robustness">
+  <h2><span class="num">03</span> Robustness across the parameter space</h2>
+  <p class="lede">Thirteen one-dimensional sweeps across four parameter families. Each was tested for a treatment × parameter
+  interaction on the safety metric. A high interaction p indicates the 40%-class reduction is statistically
+  indistinguishable across the swept range (i.e. robust); traffic volume is the sole exception (§02).</p>
+
+  <div class="content">
+    <h3>Treatment × parameter interaction p-values (collision rate)</h3>
+    <table><thead><tr><th>Parameter family</th><th>Sweep (range)</th><th>Interaction p</th><th>Interpretation</th></tr></thead><tbody>
+      <tr><td rowspan="2">Deployment geometry</td><td>Radar spacing (5–40 m)</td><td class="num">0.977</td><td>Robust</td></tr>
+      <tr><td>Radar range R_det (8–20 m)</td><td class="num">0.976</td><td>Robust</td></tr>
+      <tr><td rowspan="2">Animal &amp; sensor</td><td>Size scaling σ (0.25–3.0)</td><td class="num">0.999</td><td>Size-invariant</td></tr>
+      <tr><td>Detection rate κ (0.3–5.0 s⁻¹)</td><td class="num">0.894</td><td>Sensing saturates by κ ≥ 0.5</td></tr>
+      <tr><td rowspan="2">Awareness</td><td>Boost β (1.0–1.5×)</td><td class="num">1.000</td><td>Boost inert at λτ ≪ 1</td></tr>
+      <tr><td>Persistence τ (5–60 s)</td><td class="num">0.995</td><td>τ ≥ 10 s sufficient</td></tr>
+      <tr><td rowspan="3">Behavioural</td><td>Hesitation dwell (0.5–3 s)</td><td class="num">0.894</td><td>Robust</td></tr>
+      <tr><td>Mid-crossing freeze (0–0.5)</td><td class="num">1.000</td><td>CRN-perfect null</td></tr>
+      <tr><td>Driver reaction (0.5–3 s)</td><td class="num">0.765</td><td>Robust (compliance proxy)</td></tr>
+      <tr><td rowspan="4">Operating scope</td><td>Cruise speed (60–120 km/h)</td><td class="num">0.972</td><td>Robust</td></tr>
+      <tr><td>Caution speed (15–90 km/h)</td><td class="num">1.000</td><td>Robust (compliance proxy)</td></tr>
+      <tr><td>Animal density λ (5–240/hr)</td><td class="num">0.949</td><td>Robust; sensing layer activates</td></tr>
+      <tr><td>Traffic volume (1–16 veh/dir)</td><td class="num">7.7&times;10⁻⁵</td><td><strong>Strong interaction (§02)</strong></td></tr>
+    </tbody></table>
+    <p class="note" style="font-size:0.85rem;color:var(--muted);margin-top:0.5em;">Twelve of the 13 sweeps return interaction p &gt; 0.7. Per-sweep collision-rate and reduction panels are Supplementary Figures S1–S11 (Appendix A). Three representative sweeps are shown below; the radar-spacing sweep motivates the 15 m alternating-spacing baseline.</p>
+  </div>
+
+  <figure class="fig">
+    <img src="figure_S1_spacing.png" alt="Radar spacing sweep"
+         onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+    <div class="fig-pending" style="display:none;">figure_S1_spacing.png — regenerate from data and place in /docs</div>
+    <figcaption class="plot-caption">Figure 3. Radar same-side spacing sweep {5–40 m}. Effect concentrated in the 5–25 m band; coverage gaps grow geometrically beyond s = 2·R_det = 20 m (interaction p = 0.977).</figcaption>
+  </figure>
+
+  <figure class="fig">
+    <img src="figure_S2_size.png" alt="Animal size sweep"
+         onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+    <div class="fig-pending" style="display:none;">figure_S2_size.png — regenerate from data and place in /docs</div>
+    <figcaption class="plot-caption">Figure 4. Animal RCS-scale sweep {0.25–3.0×}. Detection size-invariant; relative collision-rate reduction statistically indistinguishable across sizes (interaction p = 0.999). Residual-collision severity remains asymmetric for large ungulates (see manuscript §4.1).</figcaption>
+  </figure>
+
+  <figure class="fig">
+    <img src="figure_S3_kappa.png" alt="Detection-rate sweep"
+         onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+    <div class="fig-pending" style="display:none;">figure_S3_kappa.png — regenerate from data and place in /docs</div>
+    <figcaption class="plot-caption">Figure 5. Per-second detection-rate κ sweep {0.3–5.0 s⁻¹}. Sensing saturates by κ ≥ 0.5 because animal exposure time, not per-frame probability, is the binding limit (interaction p = 0.894).</figcaption>
+  </figure>
+  <h3 style="margin-top:2rem;">Remaining sweep panels (Supplementary Figures S4–S11)</h3>
+
+  <figure class="fig">
+    <img src="figure_S4_awareness_beta.png" alt="figure_S4_awareness_beta"
+         onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+    <div class="fig-pending" style="display:none;">figure_S4_awareness_beta.png — place this figure in /docs</div>
+    <figcaption class="plot-caption">Figure S4. Awareness boost factor β {1.0–1.5×} — CRN-perfect null on col_rate (p = 1.000); boost inert at λτ = 0.125.</figcaption>
+  </figure>
+
+  <figure class="fig">
+    <img src="figure_S5_awareness_tau.png" alt="figure_S5_awareness_tau"
+         onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+    <div class="fig-pending" style="display:none;">figure_S5_awareness_tau.png — place this figure in /docs</div>
+    <figcaption class="plot-caption">Figure S5. Awareness persistence τ {5–60 s} — flat once τ bridges a typical approach (≈ 10 s); interaction p = 0.995.</figcaption>
+  </figure>
+
+  <figure class="fig">
+    <img src="figure_S6_hesitate_dwell.png" alt="figure_S6_hesitate_dwell"
+         onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+    <div class="fig-pending" style="display:none;">figure_S6_hesitate_dwell.png — place this figure in /docs</div>
+    <figcaption class="plot-caption">Figure S6. Maximum HESITATING dwell {0.5–3 s} — robust to this animal-side timing parameter (p = 0.894).</figcaption>
+  </figure>
+
+  <figure class="fig">
+    <img src="figure_S7_freeze_mid_cross.png" alt="figure_S7_freeze_mid_cross"
+         onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+    <div class="fig-pending" style="display:none;">figure_S7_freeze_mid_cross.png — place this figure in /docs</div>
+    <figcaption class="plot-caption">Figure S7. Mid-crossing freeze base rate {0–0.5} — second CRN-perfect null (p = 1.000).</figcaption>
+  </figure>
+
+  <figure class="fig">
+    <img src="figure_S8_driver_reaction.png" alt="figure_S8_driver_reaction"
+         onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+    <div class="fig-pending" style="display:none;">figure_S8_driver_reaction.png — place this figure in /docs</div>
+    <figcaption class="plot-caption">Figure S8. Driver perception–reaction time {0.5–3 s} — robust across the compliance proxy range (p = 0.765).</figcaption>
+  </figure>
+
+  <figure class="fig">
+    <img src="figure_S9_cruise_speed.png" alt="figure_S9_cruise_speed"
+         onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+    <div class="fig-pending" style="display:none;">figure_S9_cruise_speed.png — place this figure in /docs</div>
+    <figcaption class="plot-caption">Figure S9. Free-flow cruise speed {60–120 km/h} — reduction robust across speeds (p = 0.972).</figcaption>
+  </figure>
+
+  <figure class="fig">
+    <img src="figure_S10_caution_speed.png" alt="figure_S10_caution_speed"
+         onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+    <div class="fig-pending" style="display:none;">figure_S10_caution_speed.png — place this figure in /docs</div>
+    <figcaption class="plot-caption">Figure S10. Alerted caution-speed setpoint {15–90 km/h} — robust (p = 1.000).</figcaption>
+  </figure>
+
+  <figure class="fig">
+    <img src="figure_S11_radar_range.png" alt="figure_S11_radar_range"
+         onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+    <div class="fig-pending" style="display:none;">figure_S11_radar_range.png — place this figure in /docs</div>
+    <figcaption class="plot-caption">Figure S11. Baseline radar detection range R_det {8–20 m} — insensitive to the hard-cutoff radius assumption (p = 0.976).</figcaption>
+  </figure>
+
+</section>
+
+<section id="awareness">
+  <h2><span class="num">04</span> The awareness layer: active but not propagating</h2>
+  <p class="lede">The animal-density sweep (λ ∈ {5…240}/hr, spanning λτ = 0.042–2.0) resolves when the LoRa boost
+  does measurable work and on which metrics.</p>
+
+  <div class="content">
+    <h3>Treatment × density interaction (animal-density sweep)</h3>
+    <table><thead><tr><th>Metric</th><th>Interaction p</th><th>Direction at high density</th></tr></thead><tbody>
+      <tr><td>col_rate (safety)</td><td class="num">0.949</td><td>Null — Aware ≈ Detection at every λ</td></tr>
+      <tr><td>det_rate (sensing)</td><td class="num">6.6&times;10⁻¹⁸</td><td>Aware 28.7% &gt; Detection 20.7% at λ=120; 40.2% vs 22.5% at λ=240</td></tr>
+      <tr><td>in-range latency</td><td class="num">1.07&times;10⁻³</td><td>Aware latency higher than Detection (boost catches edge animals)</td></tr>
+    </tbody></table>
+    <p class="note" style="font-size:0.85rem;color:var(--muted);margin-top:0.5em;">The boost is implementationally correct and active (measurable sensing-side gain to extreme confidence), yet the safety outcome is null across the same sweep. The binding constraint is the safety channel, not the sensor layer: the corridor-wide DMS alert saturates once any detection fires, so additional detections cannot change an already-active caution state. This is the central architectural finding (manuscript §4.2).</p>
+  </div>
+  <figure class="fig">
+    <img src="figure_6_animal_density.png" alt="Animal-density sweep"
+         onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+    <div class="fig-pending" style="display:none;">figure_6_animal_density.png — place this figure in /docs</div>
+    <figcaption class="plot-caption">Figure 4. Animal-density sweep (λ ∈ {5…240}/hr). Detection and Aware collision-rate curves overlap (interaction p = 0.949), while the Aware detection rate and latency diverge upward at high density — the boost catches additional animals at the edge of the expanded coverage.</figcaption>
+  </figure>
+
+</section>
+
+<section id="magnetometer">
+  <h2><span class="num">05</span> Magnetometer vehicle-sensing ablation</h2>
+  <p class="lede">Does magnetometer-gated vehicle confirmation carry the signal the system needs, or is the safety outcome
+  inflated by imperfect vehicle knowledge? Two ablations (20 trials × 2 h per condition).</p>
+
+  <div class="content">
+    <h3>Vehicle-model substitution (default 0.75 m offset)</h3>
+    <table><thead><tr><th>Mode</th><th>Vehicle model</th><th>Collisions/trial</th><th>col_rate (%)</th><th>Reduction vs Control</th></tr></thead><tbody>
+      <tr><td class="mode-ctrl">Control</td><td>(n/a)</td><td class="num">0.65 &plusmn; 0.75</td><td class="num">13.76</td><td class="num">(reference)</td></tr>
+      <tr><td class="mode-det">Detection</td><td>Perfect</td><td class="num">0.40 &plusmn; 0.68</td><td class="num">7.43</td><td class="num">46.0%</td></tr>
+      <tr><td class="mode-det">Detection</td><td>Magnetometer</td><td class="num">0.35 &plusmn; 0.59</td><td class="num">6.01</td><td class="num">56.3%</td></tr>
+      <tr><td class="mode-awr">Aware</td><td>Perfect</td><td class="num">0.40 &plusmn; 0.68</td><td class="num">7.43</td><td class="num">46.0%</td></tr>
+      <tr><td class="mode-awr">Aware</td><td>Magnetometer</td><td class="num">0.35 &plusmn; 0.59</td><td class="num">6.01</td><td class="num">56.3%</td></tr>
+    </tbody></table>
+    <p class="note" style="font-size:0.85rem;color:var(--muted);margin-top:0.5em;">Aware Perfect vs Aware Magnetometer: Welch t = +0.25 (collisions/trial), +0.38 (col_rate) — both an order of magnitude below significance. Magnetometer-gated knowledge is statistically indistinguishable from a perfect-knowledge oracle.</p>
+
+    <h3>Magnetometer offset geometry sweep (Aware mode)</h3>
+    <table><thead><tr><th>Offset (m)</th><th>Present-known (%)</th><th>col_rate (%)</th><th>Reduction vs Control</th></tr></thead><tbody>
+      <tr><td class="num">(perfect)</td><td class="num">100.0</td><td class="num">7.43</td><td class="num">46.0%</td></tr>
+      <tr><td class="num">0.75</td><td class="num">93.2</td><td class="num">6.01</td><td class="num">56.3%</td></tr>
+      <tr><td class="num">1.50</td><td class="num">84.9</td><td class="num">8.51</td><td class="num">38.2%</td></tr>
+      <tr><td class="num">2.50</td><td class="num">69.6</td><td class="num">10.15</td><td class="num">26.2%</td></tr>
+      <tr><td class="num">4.00</td><td class="num">32.4</td><td class="num">11.19</td><td class="num">18.7%</td></tr>
+    </tbody></table>
+    <p class="note" style="font-size:0.85rem;color:var(--muted);margin-top:0.5em;">Deployment guidance: offset ≤ 1.5 m, with 0.75 m delivering the full magnetometer benefit. col_rate stays below the 13.76% control rate across the full range, retaining a 19% reduction even at 4 m.</p>
+  </div>
+</section>
+
+<section id="methods">
+  <h2><span class="num">06</span> Methods summary</h2>
+  <p class="lede">All results were generated by a single Python simulator, <code>wvc_simulator.py</code>, using a discrete-time
+  Monte Carlo framework (Δt = 0.1 s) on a 1 km test corridor.</p>
+
+  <div class="content">
+    <h3>System architecture</h3>
+    <p>Alternating-side Doppler radar nodes at same-side spacing s = 15 m (7.5 m alternating offset; 134 nodes/km across both shoulders), baseline detection radius R_det = 10 m; three-axis magnetometer sites every 200 m; dynamic message signs (DMS) every 250 m. Sensors communicate over an LVDS + LoRa hybrid backbone. On any detection, an awareness notification propagates over LoRa to radars within 1500 m, applying a sensitivity boost β = 1.5× to the effective detection range for τ = 30 s; the DMS simultaneously displays a caution speed.</p>
+  <figure class="fig">
+    <img src="figure_1_road_topology.png" alt="Sensor network road topology"
+         onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+    <div class="fig-pending" style="display:none;">figure_1_road_topology.png — place this figure in /docs</div>
+    <figcaption class="plot-caption">Figure M1. Sensor-network topology along a representative 1 km corridor: alternating-side radar nodes (s = 15 m, 7.5 m offset), magnetometer sites at 200 m, and DMS at 250 m intervals, with one active detection event and its LoRa awareness broadcast.</figcaption>
+  </figure>
+
+
+    <h3>Animal behaviour (FID-draw)</h3>
+    <p>Each animal occupies one of six behavioural states (FORAGING, APPROACHING, HESITATING, CROSSING, FLEEING, FROZEN, with MOVES&nbsp;AWAY absorbing). The flight decision is governed by an empirical flight-initiation-distance (FID) draw rather than fixed transition probabilities. Each responding animal draws an FID and a detection-ceiling cap from log-normal distributions fitted to the white-tailed-deer field data of Blackwell et al. (2014): fitted log-normal median FID 72 m (empirical median 69.1 m, truncated at 400 m); cap median 183 m, truncated to [50, 500] m. A fixed fraction of non-responders (0.188, FID = 0) never flee and consequently cross — the probability mass of the fitted distribution at or below the field non-response threshold. The effective trigger distance is min(FID, cap). Dwell times, locomotion speeds, and the mid-crossing freeze base rate (0.15) are assumed (Tier 3) and bounded by sensitivity sweeps. As an untuned cross-check, the emergent control-mode flee fraction (0.83) matches the field response rate (≈ 0.81).</p>
+  <figure class="fig">
+    <img src="figure_2_animal_model.png" alt="FID-draw behavioural model"
+         onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+    <div class="fig-pending" style="display:none;">figure_2_animal_model.png — place this figure in /docs</div>
+    <figcaption class="plot-caption">Figure M2. FID-draw behavioural model. Each animal draws a flight-initiation distance and a detection-ceiling cap from log-normal distributions fitted to Blackwell et al. (2014); a continuous FID monitor triggers FLEEING when an approaching vehicle enters min(FID, cap).</figcaption>
+  </figure>
+
+
+    <h3>Vehicle dynamics</h3>
+    <p>Treiber–Hennecke–Helbing Intelligent Driver Model (IDM). Free-flow cruise v₀ = 100 km/h; under an active alert with driver response, the target speed reduces to v₁ = 30 km/h after a perception–reaction lag t_react = 1.5 s (Green 2000); maximum emergency deceleration a_emerg = 8.0 m/s² (dry-asphalt traction ceiling, Lorenčič 2023).</p>
+
+    <h3>Three operating modes</h3>
+    <ul>
+      <li><strong class="mode-ctrl">Control</strong> &mdash; no sensors, no alerts, cruise speed throughout (unmitigated baseline).</li>
+      <li><strong class="mode-det">Detection</strong> &mdash; sensors active; DMS alerts drivers to caution speed on any detection; no neighbour-sensor boost.</li>
+      <li><strong class="mode-awr">Aware</strong> &mdash; Detection plus LoRa-propagated sensitivity boost (β = 1.5× on radars within 1500 m for τ = 30 s).</li>
+    </ul>
+
+    <h3>Statistical analysis</h3>
+    <p>For each metric and pairwise mode comparison: Welch's two-sample t-test on per-trial values (primary cell-level test); Poisson GLM with log-exposure offset (negative-binomial fallback when Pearson dispersion &gt; 1.5) for count-based rates, reporting rate ratios and 95% Wald intervals; a 10,000-replicate non-parametric bootstrap; and, per sweep, a pooled mode × sweep interaction test (likelihood-ratio on nested GLMs for counts; two-way OLS ANOVA for latency). Significance markers: <span class="sig-3">***</span> p &lt; 0.001, <span class="sig-2">**</span> p &lt; 0.01, <span class="sig-1">*</span> p &lt; 0.05, <span class="sig-ns">n.s.</span> otherwise. Modes within a trial share one seed (Common Random Numbers) for matched-pair precision. The headline metric is the collision rate per road entry.</p>
+  </div>
+</section>
+
+<section id="data">
+  <h2><span class="num">07</span> Data and reproducibility</h2>
+  <p class="lede">All figures and tables are generated directly from the CSVs by this repository's analysis script.
+  Re-running the script on the raw data reproduces every number on this page.</p>
+
+  <div class="content">
+    <h3>Source data</h3>
+    <p>The complete dataset is in the repository's <a href="https://github.com/suryavanshamikgpian/WVC-Radar-LoRa-Sensor-Network-MonteCarlo-Simulation/tree/main/data"><code>data/</code></a> folder. Every figure and table on this page is derived from it. Published figures are the 300&nbsp;DPI PNGs in <code>/docs</code>.</p>
+
+    <p><strong>Raw per-trial results</strong> (one row per trial):</p>
+    <ul>
+      <li><code>wvc_results.csv</code> &mdash; headline three-mode experiment (60 trials)</li>
+      <li><code>wvc_results_&lt;param&gt;.csv</code> &mdash; one file per sweep, for the 13 swept parameters: <code>spacing</code>, <code>radar_range</code>, <code>size</code>, <code>detection_rate</code>, <code>awareness_beta</code>, <code>awareness_tau</code>, <code>hesitate_dwell</code>, <code>freeze_mid_cross</code>, <code>animal_density</code>, <code>traffic_volume</code>, <code>driver_reaction</code>, <code>cruise_speed</code>, <code>caution_speed</code></li>
+    </ul>
+
+    <p><strong>Computed statistics</strong> (<code>wvc_stats_*</code>), per experiment and metric &mdash; collision rate, <code>_det_rate</code>, and <code>_latency</code> &mdash; each with a matching <code>_interaction</code> file holding the treatment&nbsp;×&nbsp;parameter test:</p>
+    <ul>
+      <li><code>wvc_stats_headline.csv</code> (+ <code>_det_rate</code>, <code>_latency</code>) &mdash; headline per-mode statistics and pairwise tests</li>
+      <li><code>wvc_stats_&lt;param&gt;.csv</code> (+ metric and <code>_interaction</code> variants) &mdash; per-sweep effect sizes and interaction tests; the interaction p-values in §03 are read from the <code>*_interaction.csv</code> files</li>
+    </ul>
+    <p class="note" style="font-size:0.85rem;color:var(--muted);">The magnetometer vehicle-sensing ablation (§05) is a separate run; its CSVs are not part of this <code>data/</code> sweep set. To offer one-click downloads from this page instead of linking to the repository, copy <code>data/</code> into <code>docs/data/</code> and point the links at <code>data/&hellip;</code>.</p>
+
+    <h3>Requirements</h3>
+    <pre>git clone https://github.com/suryavanshamikgpian/WVC-Radar-LoRa-Sensor-Network-MonteCarlo-Simulation.git
+cd WILDLIFE-VEHICLE-COLLISION-MONTECARLO
+python -m pip install numpy pandas scipy statsmodels matplotlib seaborn</pre>
+
+    <h3>Full reproduction (data &rarr; stats &rarr; figures)</h3>
+    <p>The whole tool is the single script <code>wvc.py</code>, driven by subcommands and a global
+    <code>--workdir</code> (the folder it reads CSVs from and writes outputs to). One command runs the
+    entire pipeline:</p>
+    <pre>python wvc.py --workdir data pipeline --jobs 8</pre>
+
+    <h3>Or run the stages individually</h3>
+    <pre>python wvc.py --workdir data data --jobs 8        # raw per-trial CSVs (~30-60 min)
+python wvc.py --workdir data data --skip-sweeps   # headline experiment only (~5 min)
+python wvc.py --workdir data stats                # wvc_stats_*.csv (Welch, Poisson/NB GLM, bootstrap, interaction)
+python wvc.py --workdir data figures --dpi 300    # publication PNGs (figures 3-6, S1-S11)
+python wvc.py --workdir data ablation             # magnetometer vehicle-model ablation (sec 05)</pre>
+    <p class="note" style="font-size:0.85rem;color:var(--muted);">The <code>figures</code> stage writes the PNGs
+    (<code>figure_3_headline.png</code> &hellip; <code>figure_S11_radar_range.png</code>) into the working directory;
+    copy them into <code>docs/</code> to publish, since this page references them by relative path.</p>
+
+    <h3>Standalone statistics (as referenced in the manuscript)</h3>
+    <pre>python compute_stats.py --csv-dir data</pre>
+
+    <h3>Interactive local console (optional)</h3>
+    <p>A browser-based control panel for running <code>wvc.py</code> locally:</p>
+    <pre>python wvc_web.py --workdir data        # serves http://127.0.0.1:8753</pre>
+
+    <h3>Appendix A and supplementary materials</h3>
+    <p>Appendix A (Extended Methods and Results) contains the full coverage-geometry and FID-distribution derivations, the statistical-analysis battery, per-sweep robustness narratives, Supplementary Tables S1–S5, and Supplementary Figures S1–S12.</p>
+
+    <h3>Citation</h3>
+    <p>If you use these results, please cite the accompanying paper and the archived software release:</p>
+    <pre>Sahoo, S. (2026).
+    A Radar-Magnetometer Sensor Network with LoRa-Mediated Awareness Propagation
+    for Wildlife-Vehicle Collision Mitigation: A Monte Carlo Simulation-Based
+    Proof of Concept. Indian Institute of Technology Kharagpur.
+
+Software (this release): Zenodo, v2.0.0.
+    Concept DOI (always latest): 10.5281/zenodo.[CONCEPT_ID]
+    This version:               10.5281/zenodo.[NEW_VERSION_ID]</pre>
+    <p class="note" style="font-size:0.85rem;color:var(--muted);">Replace the two DOI placeholders with the values Zenodo mints after the v2.0.0 GitHub release (the concept DOI is in the &ldquo;Cite all versions&rdquo; box on the Zenodo record).</p>
+  </div>
+</section>
+
+    <div class="footer">
+        <p>Static data page for the revised (FID-draw) manuscript. Figures are 300 DPI PNGs regenerated from
+        <code>data</code>; the interactive in-browser explorer is deferred. Full detail in Appendix A.</p>
+    </div>
+
+</body>
+</html>
